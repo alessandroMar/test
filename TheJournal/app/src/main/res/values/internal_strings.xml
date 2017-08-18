@@ -1,0 +1,3 @@
+<resources>
+  <string name="main_feed_base_url">https://api.thejournal.ie</string>
+</resources>
