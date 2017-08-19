@@ -1,3 +1,5 @@
 <resources>
   <string name="app_name">TheJournal</string>
+  <string name="generic_network_error">Network error</string>
+  <string name="try_again_text">Please try again</string>
 </resources>

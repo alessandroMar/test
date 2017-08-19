@@ -1,7 +1,7 @@
 package com.test.thejournal.ui.home.core.interactor;
 
 import com.test.thejournal.model.FeedResponse;
-import io.reactivex.Observable;
+import rx.Observable;
 
 public interface HomeInteractor {
 

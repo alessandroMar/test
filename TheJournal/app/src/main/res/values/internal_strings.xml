@@ -1,3 +1,4 @@
 <resources>
-  <string name="main_feed_base_url">https://api.thejournal.ie</string>
+  <string name="main_feed_base_url" translatable="false">https://api.thejournal.ie</string>
+  <string name="images_format_url" translatable="false">"https://watercolor.journalmedia.ie/article/%s/square?width=%d"</string>
 </resources>

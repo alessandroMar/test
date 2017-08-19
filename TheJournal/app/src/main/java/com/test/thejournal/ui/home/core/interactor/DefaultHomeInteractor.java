@@ -2,8 +2,8 @@ package com.test.thejournal.ui.home.core.interactor;
 
 import com.test.thejournal.model.FeedResponse;
 import com.test.thejournal.network.TheJournalApi;
-import io.reactivex.Observable;
 import retrofit2.Retrofit;
+import rx.Observable;
 
 public class DefaultHomeInteractor implements HomeInteractor {
 

@@ -28,6 +28,13 @@ public class HomeActivity extends AppCompatActivity {
         .inject(this);
 
     setContentView(view.getView());
+
     presenter.create();
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    presenter.destroy();
   }
 }
