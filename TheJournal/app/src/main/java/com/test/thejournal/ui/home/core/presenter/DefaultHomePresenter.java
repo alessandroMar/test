@@ -5,11 +5,10 @@ import com.test.thejournal.model.PageItems;
 import com.test.thejournal.ui.home.core.interactor.HomeInteractor;
 import com.test.thejournal.ui.home.core.view.HomeView;
 import com.test.thejournal.ui.home.wireframe.HomeWireframe;
+import com.twistedequations.mvl.rx.AndroidRxSchedulers;
 import java.util.List;
 import rx.Observable;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 public class DefaultHomePresenter implements HomePresenter {
@@ -17,15 +16,17 @@ public class DefaultHomePresenter implements HomePresenter {
   private static final String POST_TYPE = "post";
   private HomeView view;
   private HomeInteractor interactor;
-  private HomeWireframe wireframe;
+  private HomeWireframe wireframe;//wireframe will be used to provide navigation to details when defined
+  private AndroidRxSchedulers schedulers;
 
   private CompositeSubscription subscription = new CompositeSubscription();
   private int lastPageLoaded = 1;
 
-  public DefaultHomePresenter(HomeView view, HomeInteractor interactor, HomeWireframe wireframe) {
+  public DefaultHomePresenter(HomeView view, HomeInteractor interactor, HomeWireframe wireframe, AndroidRxSchedulers schedulers) {
     this.view = view;
     this.interactor = interactor;
     this.wireframe = wireframe;
+    this.schedulers = schedulers;
   }
 
   @Override
@@ -37,16 +38,16 @@ public class DefaultHomePresenter implements HomePresenter {
   }
 
   private Subscription loadFirstNews() {
-    return getObservableNews(1).observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
+    return getObservableNews(1).observeOn(schedulers.mainThread())
+        .subscribeOn(schedulers.io())
         .doOnSubscribe(() -> view.showLoading())
         .subscribe(this::showNews, this::handleError);
   }
 
   private Observable<List<PageItems>> getObservableNews(int pageToLoad) {
     return interactor.getNews(BuildConfig.publication, pageToLoad)
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
+        .observeOn(schedulers.mainThread())
+        .subscribeOn(schedulers.io())
         .flatMap(feedResponse -> Observable.from(feedResponse.getResponse().getPage_items())
             .filter(pageItems -> POST_TYPE.equalsIgnoreCase(pageItems.getType())))
         .toList();
@@ -57,8 +58,8 @@ public class DefaultHomePresenter implements HomePresenter {
   }
 
   private void refreshNews() {
-    getObservableNews(1).subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
+    getObservableNews(1).subscribeOn(schedulers.io())
+        .observeOn(schedulers.mainThread())
         .subscribe(this::showRefreshedNews, this::handleRefreshError);
   }
 
@@ -69,7 +70,6 @@ public class DefaultHomePresenter implements HomePresenter {
   private void showRefreshedNews(List<PageItems> pageItems) {
     lastPageLoaded = 1;
     view.hideEmptyState();
-    view.showNews();
     view.clearNews();
     view.showNews();
     view.addNewsToList(pageItems);
@@ -85,7 +85,6 @@ public class DefaultHomePresenter implements HomePresenter {
   }
 
   private void handleError(Throwable throwable) {
-    throwable.printStackTrace();
     view.hideLoading();
     view.showEmptyState();
   }

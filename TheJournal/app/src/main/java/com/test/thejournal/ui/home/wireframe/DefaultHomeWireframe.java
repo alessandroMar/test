@@ -13,6 +13,6 @@ public class DefaultHomeWireframe implements HomeWireframe {
 
   @Override
   public void navigateToDetail() {
-    //todo add navigation to detail
+    //todo add navigation to detail when it will be defined
   }
 }

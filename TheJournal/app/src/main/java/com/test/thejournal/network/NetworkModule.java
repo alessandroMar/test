@@ -6,7 +6,7 @@ import dagger.Provides;
 import javax.inject.Named;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 @Module
 public class NetworkModule {
@@ -15,7 +15,7 @@ public class NetworkModule {
   Retrofit provideFeedClient(@Named(TheJournalModule.MAIN_FEED_BASE_URL) String feedUrl) {
     return new Retrofit.Builder().baseUrl(feedUrl)
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(JacksonConverterFactory.create())
         .build();
   }
 }

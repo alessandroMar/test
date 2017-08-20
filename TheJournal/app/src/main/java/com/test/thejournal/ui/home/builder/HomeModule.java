@@ -9,6 +9,7 @@ import com.test.thejournal.ui.home.core.view.DefaultHomeView;
 import com.test.thejournal.ui.home.core.view.HomeView;
 import com.test.thejournal.ui.home.wireframe.DefaultHomeWireframe;
 import com.test.thejournal.ui.home.wireframe.HomeWireframe;
+import com.twistedequations.mvl.rx.AndroidRxSchedulers;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -30,8 +31,9 @@ public class HomeModule {
 
   @HomeScope
   @Provides
-  HomePresenter providePresenter(HomeView view, HomeInteractor interactor, HomeWireframe wireframe) {
-    return new DefaultHomePresenter(view, interactor, wireframe);
+  HomePresenter providePresenter(HomeView view, HomeInteractor interactor, HomeWireframe wireframe,
+      AndroidRxSchedulers schedulers) {
+    return new DefaultHomePresenter(view, interactor, wireframe, schedulers);
   }
 
   @HomeScope
@@ -45,5 +47,4 @@ public class HomeModule {
   HomeWireframe provideWireframe() {
     return new DefaultHomeWireframe(activity);
   }
-
 }

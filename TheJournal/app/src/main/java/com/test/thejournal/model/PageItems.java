@@ -1,9 +1,13 @@
 package com.test.thejournal.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 import java.util.List;
 
-public class PageItems {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class PageItems implements Serializable {
 
+  private static final long serialVersionUID = 1024215780157657318L;
   private String type;
 
   private String date;

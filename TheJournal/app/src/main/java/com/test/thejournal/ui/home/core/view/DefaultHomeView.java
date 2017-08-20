@@ -14,27 +14,8 @@ import com.test.thejournal.ui.home.core.view.listeners.OnSubscriberRefreshListen
 import com.test.thejournal.ui.home.core.view.listeners.OnSubscriberScrollListener;
 import java.util.List;
 import rx.Observable;
-import rx.Observer;
 
 public class DefaultHomeView extends LinearLayout implements HomeView {
-
-  private final Observer<Boolean> observer = new Observer<Boolean>() {
-    @Override
-    public void onCompleted() {
-      if (swipeRefreshLayout.isRefreshing())
-        swipeRefreshLayout.setRefreshing(false);
-    }
-
-    @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onNext(Boolean refreshed) {
-
-    }
-  };
 
   private ProgressBar progressBar;
   private SwipeRefreshLayout swipeRefreshLayout;
@@ -48,12 +29,6 @@ public class DefaultHomeView extends LinearLayout implements HomeView {
 
     progressBar = (ProgressBar) findViewById(R.id.progress_bar);
     swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh_view);
-    //swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-    //  @Override
-    //  public void onRefresh() {
-    //    onRefreshListener.onRefresh();
-    //  }
-    //});
     recyclerView = (RecyclerView) findViewById(R.id.feeds_list);
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
     recyclerView.setLayoutManager(layoutManager);
@@ -75,7 +50,7 @@ public class DefaultHomeView extends LinearLayout implements HomeView {
   }
 
   @Override
-  public Observable<Boolean> observeScroll() {
+  public Observable<Void> observeScroll() {
     return Observable.create(new OnSubscriberScrollListener(adapter::setScrollListener));
   }
 
@@ -116,7 +91,7 @@ public class DefaultHomeView extends LinearLayout implements HomeView {
 
   @Override
   public void clearNews() {
-    adapter.clearData( );
+    adapter.clearData();
   }
 
   @Override

@@ -11,7 +11,7 @@ public interface HomeView extends BaseView {
 
   Observable<Void> observeRefresh();
 
-  Observable<Boolean> observeScroll();
+  Observable<Void> observeScroll();
 
   void clearNews();
 

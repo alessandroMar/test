@@ -11,6 +11,7 @@ import com.test.thejournal.utils.DateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+//Possibel Improvement: define also a viewModel
 public class ArticlesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   private static final int VIEW_TYPE_ITEM = 1;

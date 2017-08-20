@@ -5,7 +5,7 @@ import rx.Subscriber;
 import rx.android.MainThreadSubscription;
 import rx.functions.Action1;
 
-public class OnSubscriberScrollListener implements Observable.OnSubscribe<Boolean> {
+public class OnSubscriberScrollListener implements Observable.OnSubscribe<Void> {
 
   private Action1<OnBottomReachListener> bindingFunction;
 
@@ -14,7 +14,7 @@ public class OnSubscriberScrollListener implements Observable.OnSubscribe<Boolea
   }
 
   @Override
-  public void call(Subscriber<? super Boolean> subscriber) {
+  public void call(Subscriber<? super Void> subscriber) {
 
     final OnBottomReachListener listener = () -> subscriber.onNext(null);
     bindingFunction.call(listener);
