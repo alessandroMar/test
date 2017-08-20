@@ -6,6 +6,14 @@ As demonstration, it has been implemented a feed of news
 
 ![](home.png)
 
+In the **ui** folder there will be a folder for each Activity/Fragment with the following structure:
+* builder, contains classes for dependency injection
+* core, contains the following folders:
+    * interactor
+    * presenter
+    * view
+* wireframe, contains classes that provide the navigation
+
 ### Library used
 
 | Library | Motivation |
