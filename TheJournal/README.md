@@ -3,7 +3,7 @@ TheJournal test app
 
 This project is a sample app developed to demostrate the usage of the clean architecture.
 As demonstration, it has been implemented a feed of news
-![](home.png)
+<img src="home.png" width="100" height=160">
 
 ### Library used
 
