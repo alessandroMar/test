@@ -14,7 +14,7 @@
     <FrameLayout
         android:layout_width="@dimen/articles_image_side"
         android:layout_height="@dimen/articles_image_side"
-        android:layout_marginRight="@dimen/article_image_margin_right">
+        android:layout_marginEnd="@dimen/article_image_margin_right">
 
       <View
           android:layout_width="match_parent"
